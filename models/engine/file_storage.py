@@ -36,7 +36,7 @@ class FileStorage:
         serializes __objects to the JSON file
         """
         all_objs = FileStorage.__objects
-        obj_dict = {key: value.to_dict() for key, value in all_objs.items()}
+        obj_dict = {obj: all_objs[obj].to_dict() for obj in all_objs.keys()}
         with open(FileStorage.__file_path, "w") as file:
             json.dump(obj_dict, file, indent=2)
 
@@ -59,4 +59,4 @@ class FileStorage:
                                   "Review": Review}
                     self.new(class_dict[cls_name](**value))
         except FileNotFoundError:
-            print("File not found")
+            pass
