@@ -8,6 +8,9 @@ import models
 
 
 class BaseModel:
+    """
+    Represents the BaseModel
+    """
     def __init__(self, *args, **kwargs):
         tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
