@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Defines the FileStorage class"""
-import os
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -45,23 +44,12 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
-        file_name = FileStorage.__file_path
-        if (not os.path.exists(file_name)) or os.stat(file_name).st_size == 0:
+        try:
+            with open(FileStorage.__file_path) as file:
+                obj_dict = json.load(file)
+                for obj in obj_dict.values():
+                    cls_name = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(cls_name)(**obj))
+        except FileNotFoundError:
             return
-
-        class_name = {"Amenity": Amenity,
-                      "BaseModel": BaseModel,
-                      "City": City,
-                      "Place": Place,
-                      "Review": Review,
-                      "State": State,
-                      "User": User}
-        with open(FileStorage.__file_path, "r") as file:
-            obj_dict = json.load(file)
-        for key, value in obj_dict.items():
-            if value['__class__'] in class_name.keys():
-                value = class_name[key.split(".")[0]](**value)
-                FileStorage.__objects.update({key: value})
-            else:
-                print("** class doesn't exist **")
-                FileStorage.__objects.update({key: None})
