@@ -1,11 +1,11 @@
 #!/usr/bin/python3
+"""Defines the FileStorage class"""
 import json
-import os
 from models.base_model import BaseModel
 from models.user import User
-from models.place import Place
 from models.state import State
 from models.city import City
+from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
@@ -37,21 +37,19 @@ class FileStorage:
         """
         all_objs = FileStorage.__objects
         obj_dict = {obj: all_objs[obj].to_dict() for obj in all_objs.keys()}
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
+        with open(FileStorage.__file_path, "w") as file:
             json.dump(obj_dict, file, indent=2)
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
-                try:
-                    obj_dict = json.load(file)
-                    for key, value in obj_dict.items():
-                        c_name, oid = key.split(".")
-                        c = eval(c_name)
-                        inst = c(**value)
-                        FileStorage.__objects[key] = inst
-                except FileNotFoundError:
-                    return
+        try:
+            with open(FileStorage.__file_path) as file:
+                objdict = json.load(file)
+                for obj in objdict.values():
+                    cls_name = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(cls_name)(**obj))
+        except FileNotFoundError:
+            return
