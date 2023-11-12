@@ -57,6 +57,17 @@ class TestBaseModel_save(unittest.TestCase):
         my_model.save()
         self.assertLess(initial_updated_at, my_model.updated_at)
 
+    def test_two_saves(self):
+        basem = BaseModel()
+        sleep(0.05)
+        first_updated_at = basem.updated_at
+        basem.save()
+        second_updated_at = basem.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        basem.save()
+        self.assertLess(second_updated_at, basem.updated_at)
+
 
 class TestBaseModel_to_dict(unittest.TestCase):
     """Unittests to_dict method of the BaseModel class."""
