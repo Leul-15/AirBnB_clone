@@ -42,6 +42,10 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+    def emptyline(self):
+        """Do nothing upon receiving an empty line."""
+        pass
+
     def do_create(self, arg):
         """
         Create a new class instance and print its id.
