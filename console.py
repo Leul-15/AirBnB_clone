@@ -138,26 +138,6 @@ class HBNBCommand(cmd.Cmd):
         print(" Unknown syntax: {}".format(arg))
         return False
 
-    def do_count(self, arg):
-        """
-        to retrieve the number of instances of a class
-        """
-        objs = storage.all()
-        cmds = shlex.split(arg)
-        if arg:
-            new_cls_name = cmds[0]
-        count = 0
-        if cmds:
-            if new_cls_name in self.class_name:
-                for obj in objs.values():
-                    if obj.__class__.__name__ == new_cls_name:
-                        count += 1
-                print(count)
-            else:
-                print("** Invalid class name **")
-        else:
-            print("** Unknown syntax **")
-
     def do_update(self, arg):
         """
         Updates an instance based on the class name and 
