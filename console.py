@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
-    def help_quit(self):
+    def help_quit(self, arg):
         """
         Display help for the quit command
         """
