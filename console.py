@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update()
         }
         if new_cmds in new_dict.keys():
-            return new_dict[new_cmds]("{} {}".format(cls_name, ""))
+            return new_dict[new_cmds]("{} {}".format(cls_name, ''))
         print(" Unknown syntax: {}".format(arg))
         return False
 
