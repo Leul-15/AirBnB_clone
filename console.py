@@ -143,8 +143,7 @@ class HBNBCommand(cmd.Cmd):
         """
         objs = storage.all()
         cmds = shlex.split(arg)
-        if arg:
-            new_cls_name = cmds[0]
+        new_cls_name = cmds[0]
         count = 0
         if cmds:
             if new_cls_name in self.class_name:
