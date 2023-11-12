@@ -164,32 +164,33 @@ class HBNBCommand(cmd.Cmd):
         id by adding or updating attribute
         """
         cmds = shlex.split(arg)
-        if len(cmds) == 0:
-            print("** class name missing **")
-        elif cmds[0] not in self.class_name:
-            print("** class doesn't exist **")
-        elif len(cmds) < 2:
-            print("** instance id missing **")
+    if len(cmds) == 0:
+        print("** class name missing **")
+    elif cmds[0] not in self.class_name:
+        print("** class doesn't exist **")
+    elif len(cmds) < 2:
+        print("** instance id missing **")
+    else:
+        obj_dict = storage.all()
+        key = "{}.{}".format(cmds[0], cmds[1])
+        if key not in obj_dict:
+            print("** no instance found **")
+        elif len(cmds) < 3:
+            print("** attribute name missing **")
         else:
-            obj = storage.all()
-            key = "{}.{}".format(cmds[0], cmds[1])
-            if key not in obj:
-                print("** no instance found **")
-            elif len(cmds) < 3:
-                print("** attribute name missing **")
-            elif len(cmds) < 4:
-                print("** value missing **")
-            else:
-                objects = obj[key]
-                attribute_name = cmds[2]
-                attribute_value = cmds[3]
-
-                try:
-                    attribute_value = eval(attribute_value)
-                except Exception:
-                    pass
-                setattr(objects, attribute_name, attribute_value)
-                objects.save()
+            objs = obj_dict[key]
+            try:
+                # Extracting the dictionary representation from the argument
+                dict_str = arg.split("{", 1)[1].rsplit("}", 1)[0]
+                new_dict = eval("{" + dict_str + "}")
+                if type(new_dict) is dict:
+                    for k, v in new_dict.items():
+                        setattr(objs, k, v)
+                    objs.save()
+                else:
+                    print("** invalid attribute name **")
+            except Exception as e:
+                print("** invalid attribute name **")
 
 
 if __name__ == '__main__':
