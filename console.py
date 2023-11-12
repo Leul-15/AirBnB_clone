@@ -125,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
         cls_name = cmd_list[0]
         cmds = cmd_list[1].split("(")
         new_cmds = cmds[0]
+        new_arg = cmds[1].split(")")[0]
         new_dict = {
             "show": self.do_show,
             "all": self.do_all,
@@ -133,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
             "count": self.do_count
         }
         if new_cmds in new_dict.keys():
-            return new_dict[new_cmds]("{} {}".format(cls_name, ""))
+            return new_dict[new_cmds]("{} {}".format(cls_name, new_arg))
         print(" Unknown syntax: {}".format(arg))
         return False
 
