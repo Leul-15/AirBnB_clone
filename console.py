@@ -117,6 +117,25 @@ class HBNBCommand(cmd.Cmd):
                 if k.split(".")[0] == cmds[0]:
                     print(str(v))
 
+    def default(self, arg):
+        """
+        Default method
+        """
+        cmd_list = arg.split(".")
+        cls_name = cmd_list[0]
+        cmds = cmd_list[1].split("(")
+        new_cmds = cmds[0]
+        new_dict = {
+            "show": self.do_show(),
+            "all": self.do_all(),
+            "destroy": self.do_destroy(),
+            "update": self.do_update()
+        }
+        if new_cmds in new_dict.keys():
+            return new_dict[new_cmds]("{} {}".format(cls_name, ""))
+        print(" Unknown syntax: {}".format(arg))
+        return False
+
     def do_update(self, arg):
         """
         Updates an instance based on the class name and 
