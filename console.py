@@ -126,10 +126,10 @@ class HBNBCommand(cmd.Cmd):
         cmds = cmd_list[1].split("(")
         new_cmds = cmds[0]
         new_dict = {
-            "show": self.do_show(),
-            "all": self.do_all(),
-            "destroy": self.do_destroy(),
-            "update": self.do_update()
+            "show": self.do_show,
+            "all": self.do_all,
+            "destroy": self.do_destroy,
+            "update": self.do_update
         }
         if new_cmds in new_dict.keys():
             return new_dict[new_cmds]("{} {}".format(cls_name, ""))
