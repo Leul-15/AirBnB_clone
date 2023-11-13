@@ -27,7 +27,6 @@ class HBNBCommand(cmd.Cmd):
         """
         Quit command to exit the program
         """
-        print("(hbnb)")
         return True
 
     def help_quit(self):
@@ -40,12 +39,12 @@ class HBNBCommand(cmd.Cmd):
         """
         Exit the program on EOF
         """
-        print("(hbnb)")
+        print()
         return True
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
-        print("1")
+        pass
 
     def do_create(self, arg):
         """
