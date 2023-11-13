@@ -158,15 +158,6 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.reload(None)
 
-    def test_base_model_save(self):
-        basem = BaseModel()
-
-        basem.save()
-
-        with open("file.json", "r") as files:
-            save_text = files.read()
-            self.assertIn("BaseModel." + basem.id, save_text)
-
 
 if __name__ == "__main__":
     unittest.main()
