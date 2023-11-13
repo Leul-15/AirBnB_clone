@@ -12,7 +12,7 @@ class TestHBNBCommand_prompting(unittest.TestCase):
     """Unittests prompting of the command interpreter"""
 
     def test_prompt_string(self):
-        self.assertEqual("(hbnb)", HBNBCommand.prompt)
+        self.assertEqual("(hbnb) ", HBNBCommand.prompt)
 
 
 class TestHBNBCommand_help(unittest.TestCase):
