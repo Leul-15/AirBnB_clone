@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        Prints the string representation of an instance based on the 
+        Prints the string representation of an instance based on the
         class name and id
         """
         cmds = shlex.split(arg)
@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances based or not on 
+        Prints all string representation of all instances based or not on
         the class name
         """
         obj = storage.all()
@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and 
+        Updates an instance based on the class name and
         id by adding or updating attribute
         """
         cmds = shlex.split(arg)
