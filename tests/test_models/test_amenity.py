@@ -29,6 +29,12 @@ class TestAmenity_instantiation(unittest.TestCase):
         amenit2 = Amenity()
         self.assertNotEqual(amenit1.id, amenit2.id)
 
+    def test_name_is_public_class_attribute(self):
+        amenity = Amenity()
+        self.assertEqual(str, type(Amenity.name))
+        self.assertIn("name", dir(Amenity()))
+        self.assertNotIn("name", amenity.__dict__)
+
 
 class TestAmenity_save(unittest.TestCase):
     """Unittests save method of the Amenity class"""
