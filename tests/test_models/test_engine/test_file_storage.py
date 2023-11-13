@@ -163,8 +163,8 @@ class TestFileStorage_methods(unittest.TestCase):
 
         basem.save()
 
-        with open("file.json", "r") as file:
-            save_text = file.read()
+        with open("file.json", "r") as files:
+            save_text = files.read()
             self.assertIn("BaseModel." + basem.id, save_text)
 
 
