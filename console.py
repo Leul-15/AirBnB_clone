@@ -126,6 +126,7 @@ class HBNBCommand(cmd.Cmd):
         cmds = cmd_list[1].split("(")
         new_cmds = cmds[0]
         new_arg = cmds[1].split(")")[0]
+        extra_args = new_arg.split(",")
         new_dict = {
             "show": self.do_show,
             "all": self.do_all,
@@ -134,7 +135,16 @@ class HBNBCommand(cmd.Cmd):
             "count": self.do_count
         }
         if new_cmds in new_dict.keys():
-            return new_dict[new_cmds]("{} {}".format(cls_name, new_arg))
+            if new_cmds != "update":
+                return new_dict[new_cmds]("{} {}".format(cls_name, new_arg))
+            else:
+                object_id = extra_args[0]
+                attribute_name = extra_args[1]
+                attribute_value = extra_args[2]
+                return new_dict[new_cmds]("{} {} {} {}".format(cls_name,
+                                                               object_id,
+                                                               attribute_name,
+                                                               attribute_value))
         print(" Unknown syntax: {}".format(arg))
         return False
 
